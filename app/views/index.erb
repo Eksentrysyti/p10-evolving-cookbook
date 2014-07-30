@@ -1,0 +1,36 @@
+<div class="container">
+	<% if logged_in? %>
+
+	<div class="user-id" value="<%=@user.id%>" style="display: none;"></div>
+
+  <h1><%=@user.name%>'s Cookbook Control Panel</h1>
+
+  <form>
+    <input type="text" id="new-ingredient">
+    <button class="add-ingredient">Add Ingredient</button>
+  </form>
+  <form method="get" action="/recipes">
+    <button class="find-recipes">Find Recipes!</button>
+  </form>
+
+  <div class="ingredient-container">
+    <ul class="ingredient-list">
+      <% @ingredients.each do |ingredient| %>
+        <li id="<%=ingredient.name%>"><%=ingredient.name%> <a href="#" class="delete-ingredient">X</a></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="recipe-container">
+    <h3>Recipes~!</h3>
+  </div>
+
+	<div class="ingredient-template" style="display: none;">
+  	<li id=""> <a href="#" class="delete-ingredient">X</a></li>
+	</div>
+
+
+	<% else %>
+		<h1>Welcome! Please Log In</h1>
+	<% end %>
+</div>
