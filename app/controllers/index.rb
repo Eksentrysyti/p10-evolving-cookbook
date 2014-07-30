@@ -1,3 +1,9 @@
+# RUN THIS CODE ONLY FOR HEROKU DEPLOYED VERSIONS
+# after do
+#   ActiveRecord::Base.connection.close
+# end
+# -----------------------------------------------
+
 get '/' do
   if session[:user_id]
  	  @user = User.find(session[:user_id])
