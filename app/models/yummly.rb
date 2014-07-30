@@ -10,7 +10,7 @@ module Yummly
     end
 
     def recipes
-      api_uri = "/api/recipes?_app_id=281eb528&_app_key=647a87ea8f496209b18fdd54a2088627" + @my_ingredients
+      api_uri = "/api/recipes?_app_id=#{ENV['YUMMLY_APP_ID']}&_app_key=#{ENV['YUMMLY_APP_KEY']}" + @my_ingredients
       response = self.class.get(api_uri)
       response.body
     end
