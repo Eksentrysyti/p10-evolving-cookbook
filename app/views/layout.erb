@@ -19,9 +19,10 @@
     <ul>
       <li class='active'><a href='/'><span>Home</span></a></li>
       <li><a href='/cookbook'><span>RecipeFinder</span></a></li>
-      <li><a href='/favorites'><span>Favorites</span></a></li>
+      <li><a href='/favorites'><span>My Favorite Recipes</span></a></li>
       <% if logged_in? %>
         <li class='last'><a href='/logout'><span>Sign Out</span></a></li>
+        <li class='name'><span>Logged in as: <%=session[:user_name]%></span>
       <% end %>
     </ul>
   </div>
