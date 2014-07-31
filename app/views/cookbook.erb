@@ -1,7 +1,7 @@
 <div class="container">
   <% if logged_in? %>
 
-  <h1><%=@user.name%>'s RecipeFinder</h1>
+  <h1><%=session[:user_name]%>'s RecipeFinder</h1>
 
   <form class="add-ingredient">
     <input type="text">
@@ -15,7 +15,7 @@
   <div class="ingredient-container">
     <h3>Ingredients</h3>
     <form class="ingredient-list"></form>
-    <button class="delete-selected">Delete Selected</button>
+    <button class="delete-selected">Delete Selected Ingredients</button>
   </div>
 
   <div class="recipe-container">
@@ -25,11 +25,17 @@
 
   <div class="ingredient-template" style="display: none;">
     <div class="ingredient-item">
-      <input type="checkbox" name="ingredient" value="">
+      <input type="checkbox" name="ingredient" value="" checked>
       <span></span>
     </div>
   </div>
 
+  <div class="recipe-template" style="display: none;">
+    <figure class="recipe-item">
+      <img>
+      <figcaption></figcaption>
+    </figure>
+  </div>
 
   <% else %>
     <h1>Welcome! Please Log In</h1>
