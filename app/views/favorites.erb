@@ -1,0 +1,11 @@
+<div class="container">
+  <% if logged_in? %>
+
+  <h1><%=session[:user_name]%>'s Favorites</h1>
+
+
+
+  <% else %>
+    <h1>Welcome! Please Log In</h1>
+  <% end %>
+</div>
