@@ -109,3 +109,9 @@
   background: #A11891;
   float: right;
 }
+
+#cssmenu .name {
+  margin-top: 10px;
+  background-color: white;
+  float: right;
+}

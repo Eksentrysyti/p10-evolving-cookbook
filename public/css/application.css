@@ -74,6 +74,11 @@ form.quirks {
   width: 200px;
 }
 
+.recipe-item img {
+  height: 150px;
+  width: 150px;
+}
+
 #sign-out input {
   border:none;
   background:none;
