@@ -1,11 +1,10 @@
 function buildIngredient(ingredientName) {
-  // gets Ingredient Template stored in DOM
-  // Finds the ingredient_template that is hidden and gets the template contents
+
   var ingredientTemplate = $.trim($('.ingredient-template').html());
-  // Creates an jQueryDOMElement from the ingredientTemplate
   var $ingredient = $(ingredientTemplate);
-  // Modifies its text to use the passed-in ingredientName
-  $ingredient.prepend(ingredientName).attr("id", ingredientName);
-  // Returns the jQueryDOMElement to be used elsewhere
-  return $ingredient
+
+  $ingredient.children("span").text(ingredientName);
+  $ingredient.children("input").val(ingredientName)
+
+  return $ingredient;
 }

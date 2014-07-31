@@ -1,58 +1,40 @@
 $(document).ready(function() {
-	$('.add-ingredient').on('click', addIngredient);
-	$('.ingredient-list').on('click', "a", deleteIngredient);
+	$('.add-ingredient').on('click', 'button', addIngredient);
+	$('.delete-selected').on('click', deleteIngredients);
 	$('.find-recipes').on('click', findRecipes)
 });
 
 function addIngredient(event){
 	event.preventDefault();
 
-	var newIngredient = $('#new-ingredient').val();
-	$('#new-ingredient').val("");
+  var ingredientName = $('.add-ingredient').children("input").val();
+  $('.add-ingredient').children("input").val("");
 
-	var userId = parseInt($('div.user-id').attr("value"));
-
-	var request = $.ajax({
-		url: '/ingredients', 
-		type: 'POST',
-		data: {	ingredient_name: newIngredient }
-	}).done(addIngredientDOM);
+  var ingredientElement = buildIngredient(ingredientName);
+	$('.ingredient-list').append(ingredientElement);
 }
 
-function addIngredientDOM(data){
-	var ingredientName = JSON.parse(data).ingredient_name;
-	var ingredientItem = buildIngredient(ingredientName);
+function deleteIngredients(e){
+	e.preventDefault();
 
-	$('.ingredient-list').append(ingredientItem);
-}
-
-function deleteIngredient(event){
-	event.preventDefault();
-
-	var ingredientName = $(this).closest("li").attr("id");
-	var request = $.ajax({
-		url: '/ingredients',
-		type: 'DELETE',
-		data: { ingredient_name: ingredientName }
-	}).done(deleteIngredientDOM);
-}
-
-function deleteIngredientDOM(data){
-	var ingredientName = JSON.parse(data).ingredient_name;
-	$("li#"+ingredientName).remove();
+  var $selectedIngredients = $('input[type="checkbox"]:checked')
+  $selectedIngredients.parent().remove();
 }
 
 function findRecipes(event){
 	event.preventDefault();
 
-	var request = $.ajax({
-		url: 'recipes', 
-		type: 'GET'
-	}).done(findRecipesDOM)
+	var ingredientArray = []
+  var $selectedIngredients = $('input[type="checkbox"]:checked')
+
+	$selectedIngredients.each(function(i){
+		ingredientArray.push($(this).val())
+	})
+
 }
 
-function findRecipesDOM(data){
-	$.each($.parseJSON(data).matches, function(index, value){
-		$('.recipe-container').append('<p>' + value.recipeName + '</p>')
-	})
-}
+// function findRecipesDOM(data){
+// 	$.each($.parseJSON(data).matches, function(index, value){
+// 		$('.recipe-container').append('<p>' + value.recipeName + '</p>')
+// 	})
+// }

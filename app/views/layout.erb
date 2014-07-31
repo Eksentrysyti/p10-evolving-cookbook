@@ -2,34 +2,29 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="/css/normalize.css">
-  
   <link rel="stylesheet" href="/css/application.css">
+  <link rel="stylesheet" href="/css/navbar.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/js/navbar.js"></script>
   <script src="/js/application.js"></script>
   <script src="/js/helpers.js"></script>
 
   <title></title>
 </head>
+
 <body>
 
-  <nav>
-    <div class="brand"><a href="/">Evolving Cookbook</a>
-    </div>
+  <div id='cssmenu'>
     <ul>
+      <li class='active'><a href='/'><span>Home</span></a></li>
+      <li><a href='/cookbook'><span>RecipeFinder</span></a></li>
+      <li><a href='/favorites'><span>Favorites</span></a></li>
       <% if logged_in? %>
-        <li>
-          <form id="sign-out" action="/sessions/<%= current_user.id %>" method="post">
-            <input name="_method" type="hidden" value="delete" />
-            <input type="submit" value="Sign Out">
-          </form>
-        </li>
-      <% else %>
-        <li><a href="/sessions/new">Sign In</a></li>
-        <li><a href="/users/new">Sign Up</a></li>
+        <li class='last'><a href='/logout'><span>Sign Out</span></a></li>
       <% end %>
     </ul>
-  </nav>
+  </div>
 
   <%= yield %>
 </body>
