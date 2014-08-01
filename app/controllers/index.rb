@@ -79,7 +79,7 @@ end
 post '/favorites' do
   api = Yummly::Client.new(params)
   response = api.get_recipe
-  User.find(session[:user_id]).recipes << Recipe.create(get_ingredients(response))
+  User.find(session[:user_id]).recipes << Recipe.create(get_recipe_details(response))
   response
 end
 
