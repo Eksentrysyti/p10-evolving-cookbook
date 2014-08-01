@@ -16,12 +16,14 @@ end
 post '/sessions' do
   # sign-in, create session
   user = User.where(email: params[:email]).first
-  if user.password == params[:password]
+  if user && user.password == params[:password]
     session[:user_id] = user.id
     session[:user_name] = user.name
-  end
 
-  redirect '/cookbook'
+    redirect '/recipe_finder'
+  else
+    redirect '/'
+  end
 end
 
 # routed from a link, changed to a non-restful get route
@@ -41,17 +43,17 @@ post '/users' do
   @user.password = params[:user][:password]
   @user.save!
 
-  redirect '/'
+  redirect '/recipe_finder'
 end
 
-# ---------- COOKBOOK -------------------
+# ---------- RECIPEFINDER -------------------
 
-get '/cookbook' do
+get '/recipe_finder' do
   if session[:user_id]
     @user = User.find(session[:user_id])
   end
 
-  erb :cookbook
+  erb :recipe_finder
 end
 
 # ---------- RECIPES --------------------
@@ -63,11 +65,22 @@ end
 
 get '/get_recipe' do
   api = Yummly::Client.new(params)
-  p api.get_recipe
+  api.get_recipe
 end
 
 # ---------- FAVORITES ------------------
 
 get '/favorites' do
+  @favorites = User.find(session[:user_id]).recipes
+
   erb :favorites
 end
+
+post '/favorites' do
+  api = Yummly::Client.new(params)
+  response = api.get_recipe
+  User.find(session[:user_id]).recipes << Recipe.create(get_ingredients(response))
+  response
+end
+
+
