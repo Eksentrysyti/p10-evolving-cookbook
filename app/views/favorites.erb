@@ -1,8 +1,29 @@
 <div class="container">
   <% if logged_in? %>
 
-  <h1><%=session[:user_name]%>'s Favorites</h1>
+    <h1><%=session[:user_name]%>'s Favorites</h1>
 
+    <div class="favorite-container">
+      <%@favorites.each do |favorite| %>
+        <div>
+          <h2><%=favorite.name%></h2>
+          <span>
+            <a href="<%=favorite.source_url%>" target="_blank">
+              <img src="<%=favorite.large_image_url%>">
+            </a>
+          </span>
+          <span>
+            <h3>Ingredients:</h3>
+            <ul>
+              <%favorite.ingredient_list.each do |ingredient|%>
+                <li><%=ingredient%></li>
+              <% end %>
+            </ul>
+          </span>
+          <p></p>
+        </div>
+      <% end %>
+    </div>
 
 
   <% else %>
