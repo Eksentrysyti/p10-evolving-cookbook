@@ -52,6 +52,7 @@ function drawRecipesDOM(data){
   var matchCount = $responseObject.totalMatchCount;
 
   $('.recipe-list').empty();
+
   $.each($responseObject.matches, function(index,value){
     $('.recipe-list').append(buildRecipe(value))
   });

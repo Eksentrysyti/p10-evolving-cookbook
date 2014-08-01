@@ -39,10 +39,12 @@ end
 
 post '/users' do
   # sign-up, create user
-  @user = User.create(name: params[:user][:name], email: params[:user][:email])
-  @user.password = params[:user][:password]
-  @user.save!
-
+  user = User.create(name: params[:user][:name], email: params[:user][:email])
+  user.password = params[:user][:password]
+  user.save!
+  session[:user_id] = user.id
+  session[:user_name] = user.name
+  
   redirect '/recipe_finder'
 end
 
@@ -71,8 +73,10 @@ end
 # ---------- FAVORITES ------------------
 
 get '/favorites' do
-  @favorites = User.find(session[:user_id]).recipes
-
+  if session[:user_id]
+    @favorites = User.find(session[:user_id]).recipes
+  end
+  
   erb :favorites
 end
 

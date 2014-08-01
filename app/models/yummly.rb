@@ -10,13 +10,13 @@ module Yummly
     end
 
     def recipes
-      api_uri = "/api/recipes?_app_id=#{ENV['YUMMLY_APP_ID']}&_app_key=#{ENV['YUMMLY_APP_KEY']}" + build_ingredient_string
+      api_uri = "/api/recipes?_app_id=#{ENV['YUMMLY_APP_ID']}&_app_key=#{ENV['YUMMLY_API_KEY']}" + build_ingredient_string
       response = self.class.get(api_uri)
       response.body
     end
 
     def get_recipe
-      api_uri = "/api/recipe/#{@recipe_id}?_app_id=#{ENV['YUMMLY_APP_ID']}&_app_key=#{ENV['YUMMLY_APP_KEY']}"
+      api_uri = "/api/recipe/#{@recipe_id}?_app_id=#{ENV['YUMMLY_APP_ID']}&_app_key=#{ENV['YUMMLY_API_KEY']}"
       response = self.class.get(api_uri)
       response.body
     end

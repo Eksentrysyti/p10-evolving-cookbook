@@ -79,6 +79,10 @@ form.quirks {
   width: 150px;
 }
 
+.favorite-recipe li {
+  list-style-type: none;
+}
+
 #sign-out input {
   border:none;
   background:none;
