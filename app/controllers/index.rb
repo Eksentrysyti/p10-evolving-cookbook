@@ -1,7 +1,7 @@
 # RUN THIS CODE ONLY FOR HEROKU DEPLOYED VERSIONS
-# after do
-#   ActiveRecord::Base.connection.close
-# end
+after do
+  ActiveRecord::Base.connection.close
+end
 # ----------------------------------------
 
 # ---------- LANDING PAGE ----------------
